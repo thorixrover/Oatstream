@@ -50,7 +50,7 @@ const OnboardingPage = () => {
     <div className="min-h-screen bg-base-100 flex items-center justify-center p-4">
       <div className="card bg-base-200 w-full max-w-3xl shadow-xl">
         <div className="card-body p-6 sm:p-8">
-          <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">Complete Your Profile</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-center mb-6">Selesaikan Pengisian Profilmu</h1>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* PROFILE PIC CONTAINER */}
@@ -74,7 +74,7 @@ const OnboardingPage = () => {
               <div className="flex items-center gap-2">
                 <button type="button" onClick={handleRandomAvatar} className="btn btn-accent">
                   <ShuffleIcon className="size-4 mr-2" />
-                  Generate Random Avatar
+                  Hasilkan Avatar Secara Acak
                 </button>
               </div>
             </div>
@@ -82,7 +82,7 @@ const OnboardingPage = () => {
             {/* FULL NAME */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Full Name</span>
+                <span className="label-text">Nama Lengkap</span>
               </label>
               <input
                 type="text"
@@ -113,7 +113,7 @@ const OnboardingPage = () => {
               {/* NATIVE LANGUAGE */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Native Language</span>
+                  <span className="label-text">Bahasa Aslimu</span>
                 </label>
                 <select
                   name="nativeLanguage"
@@ -121,7 +121,7 @@ const OnboardingPage = () => {
                   onChange={(e) => setFormState({ ...formState, nativeLanguage: e.target.value })}
                   className="select select-bordered w-full"
                 >
-                  <option value="">Select your native language</option>
+                  <option value="">Pilih Bahasa Aslimu</option>
                   {LANGUAGES.map((lang) => (
                     <option key={`native-${lang}`} value={lang.toLowerCase()}>
                       {lang}
@@ -133,7 +133,7 @@ const OnboardingPage = () => {
               {/* LEARNING LANGUAGE */}
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Learning Language</span>
+                  <span className="label-text">Bahasa yang ingin dipelajari</span>
                 </label>
                 <select
                   name="learningLanguage"
@@ -141,7 +141,7 @@ const OnboardingPage = () => {
                   onChange={(e) => setFormState({ ...formState, learningLanguage: e.target.value })}
                   className="select select-bordered w-full"
                 >
-                  <option value="">Select language you're learning</option>
+                  <option value="">Pilih Bahasa yang ingin kamu Pelajari</option>
                   {LANGUAGES.map((lang) => (
                     <option key={`learning-${lang}`} value={lang.toLowerCase()}>
                       {lang}
@@ -154,7 +154,7 @@ const OnboardingPage = () => {
             {/* LOCATION */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Location</span>
+                <span className="label-text">Lokasi</span>
               </label>
               <div className="relative">
                 <MapPinIcon className="absolute top-1/2 transform -translate-y-1/2 left-3 size-5 text-base-content opacity-70" />
@@ -175,7 +175,7 @@ const OnboardingPage = () => {
               {!isPending ? (
                 <>
                   <Wheat className="size-5 mr-2" />
-                  Complete Onboarding
+                   Onboarding Berhasil
                 </>
               ) : (
                 <>

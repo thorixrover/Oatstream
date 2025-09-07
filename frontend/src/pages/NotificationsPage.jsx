@@ -3,7 +3,6 @@ import { acceptFriendRequest, getFriendRequests } from "../lib/api";
 import { BellIcon, ClockIcon, MessageSquareIcon, UserCheckIcon } from "lucide-react";
 import NoNotificationsFound from "../components/NoNotificationsFound";
 
-
 const NotificationsPage = () => {
   const queryClient = useQueryClient();
 
@@ -22,11 +21,22 @@ const NotificationsPage = () => {
 
   const incomingRequests = friendRequests?.incomingReqs || [];
   const acceptedRequests = friendRequests?.acceptedReqs || [];
-  
-return (
+
+  return (
     <div className="p-4 sm:p-6 lg:p-8">
       <div className="container mx-auto max-w-4xl space-y-8">
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight mb-6">Notifications</h1>
+        {/* Tambahkan icon notifikasi dengan badge angka di sini */}
+        <div className="flex items-center gap-3 mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Notifications</h1>
+          <div className="relative">
+            <BellIcon className={`w-7 h-7 ${incomingRequests.length > 0 ? "text-red-500 animate-bounce" : "text-primary"}`} />
+            {incomingRequests.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-2 py-0.5">
+                {incomingRequests.length}
+              </span>
+            )}
+          </div>
+        </div>
 
         {isLoading ? (
           <div className="flex justify-center py-12">
@@ -38,10 +48,9 @@ return (
               <section className="space-y-4">
                 <h2 className="text-xl font-semibold flex items-center gap-2">
                   <UserCheckIcon className="h-5 w-5 text-primary" />
-                  Friend Requests
+                  Permintaan Pertemanan
                   <span className="badge badge-primary ml-2">{incomingRequests.length}</span>
                 </h2>
-
                 <div className="space-y-3">
                   {incomingRequests.map((request) => (
                     <div
@@ -52,27 +61,26 @@ return (
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
                             <div className="avatar w-14 h-14 rounded-full bg-base-300">
-                              <img src={request.sender.profilePic} alt={request.sender.fullName} />
+                              <img src={request.sender?.profilePic} alt={request.sender?.fullName} />
                             </div>
                             <div>
-                              <h3 className="font-semibold">{request.sender.fullName}</h3>
+                              <h3 className="font-semibold">{request.sender?.fullName}</h3>
                               <div className="flex flex-wrap gap-1.5 mt-1">
                                 <span className="badge badge-secondary badge-sm">
-                                  Native: {request.sender.nativeLanguage}
+                                  Bahasa Asli: {request.sender?.nativeLanguage}
                                 </span>
                                 <span className="badge badge-outline badge-sm">
-                                  Learning: {request.sender.learningLanguage}
+                                  Dipelajari: {request.sender?.learningLanguage}
                                 </span>
                               </div>
                             </div>
                           </div>
-
                           <button
                             className="btn btn-primary btn-sm"
                             onClick={() => acceptRequestMutation(request._id)}
                             disabled={isPending}
                           >
-                            Accept
+                            Terima
                           </button>
                         </div>
                       </div>
@@ -87,9 +95,8 @@ return (
               <section className="space-y-4">
                 <h2 className="text-xl font-semibold flex items-center gap-2">
                   <BellIcon className="h-5 w-5 text-success" />
-                  New Connections
+                  Koneksi Baru
                 </h2>
-
                 <div className="space-y-3">
                   {acceptedRequests.map((notification) => (
                     <div key={notification._id} className="card bg-base-200 shadow-sm">
@@ -97,25 +104,23 @@ return (
                         <div className="flex items-start gap-3">
                           <div className="avatar mt-1 size-10 rounded-full">
                             <img
-                              src={notification.recipient.profilePic}
-                              alt={notification.recipient.fullName}
+                              src={notification.recipient?.profilePic}
+                              alt={notification.recipient?.fullName}
                             />
                           </div>
-                          
                           <div className="flex-1">
-                            <h3 className="font-semibold">{notification.recipient.fullName}</h3>
+                            <h3 className="font-semibold">{notification.recipient?.fullName}</h3>
                             <p className="text-sm my-1">
-                              {notification.recipient.fullName} accepted your friend request
+                              {notification.recipient?.fullName} Terima Permintaan Pertemanan
                             </p>
                             <p className="text-xs flex items-center opacity-70">
                               <ClockIcon className="h-3 w-3 mr-1" />
                               Recently
                             </p>
                           </div>
-
                           <div className="badge badge-success">
                             <MessageSquareIcon className="h-3 w-3 mr-1" />
-                            New Friend
+                            Teman Baru
                           </div>
                         </div>
                       </div>

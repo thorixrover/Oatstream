@@ -64,3 +64,12 @@ export async function getStreamToken() {
   const response = await axiosInstance.get("/chat/token");
   return response.data;
 }
+
+
+
+
+
+export async function getFriends() {
+  const response = await axiosInstance.get("/users/friends");
+  return response.data;
+}

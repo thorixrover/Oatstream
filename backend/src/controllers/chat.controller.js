@@ -1,9 +1,9 @@
 import { generateStreamToken } from "../lib/stream.js";
 
-
 export async function getStreamToken(req, res) {
     try {
-        const token = generateStreamToken(req,User,id);
+        const userId = req.user.id; // Ambil ID dari user yang sudah login
+        const token = generateStreamToken(userId); // Kirim id ke fungsi token
 
         res.status(200).json({ token });
     } catch (error) {

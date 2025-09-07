@@ -3,23 +3,24 @@ import useAuthUser from "../hooks/useAuthUser"
 import { Wheat, BellIcon, LogOutIcon } from "lucide-react";
 import ThemeSelector from "./ThemeSelector.jsx";
 import useLogout from "../hooks/useLogout.js";
-
+import { useQuery } from "@tanstack/react-query";
+import { getFriendRequests } from "../lib/api";
 
 const Navbar = () => {
   const { authUser } = useAuthUser();
   const location = useLocation();
   const isChatPage = location.pathname?.startsWith("/chat");
 
-   //const queryClient = useQueryClient();
-   //const { mutate: logoutMutation } = useMutation({
-    // mutationFn: logout,
-    // onSuccess: () => queryClient.invalidateQueries({ queryKey: ["authUser"] }),
-   //});
+  const { logoutMutation } = useLogout();
 
+  // Ambil jumlah permintaan pertemanan masuk
+  const { data: friendRequests } = useQuery({
+    queryKey: ["friendRequests"],
+    queryFn: getFriendRequests,
+  });
+  const incomingRequests = friendRequests?.incomingReqs || [];
 
-   const { logoutMutation } = useLogout();
-
-   return (
+  return (
     <nav className="bg-base-200 border-b border-base-300 sticky top-0 z-30 h-16 flex items-center">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-end w-full">
@@ -37,13 +38,17 @@ const Navbar = () => {
 
           <div className="flex items-center gap-3 sm:gap-4 ml-auto">
             <Link to={"/notifications"}>
-              <button className="btn btn-ghost btn-circle">
+              <button className="btn btn-ghost btn-circle relative">
                 <BellIcon className="h-6 w-6 text-base-content opacity-70" />
+                {incomingRequests.length > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5">
+                    {incomingRequests.length}
+                  </span>
+                )}
               </button>
             </Link>
           </div>
 
-          {/* TODO */}
           <ThemeSelector />
 
           <div className="avatar">

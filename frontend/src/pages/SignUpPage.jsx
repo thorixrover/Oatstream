@@ -61,7 +61,7 @@ return (
                 <div>
                     <h2 className="text-xl font-semibold">Create an Account</h2>
                         <p className="text-sm opacity-70">
-                        Join Oatstream and connect to explore our world languages!
+                        Bergabunglah dengan Oatstream dan jelajahi bahasa-bahasa dunia bersama!
                         </p>
                 </div>
                 <div className="space-y-3">
@@ -149,7 +149,7 @@ return (
 
                 <div className='text-center mt-4'>
                     <p className="text-sm">
-                        Already have an Account?{" "}
+                        Sudah pernah daftar sebelumnya?{" "}
                         <Link to="/login" className="text-cyan-500 hover:underline">
                         Sign in
                         </Link>
@@ -172,9 +172,9 @@ return (
             </div>
 
             <div className="text-center space-y-3 mt-6">
-                <h2 className="text-xl font-semibold">Connect with language partners worldwide</h2>
+                <h2 className="text-xl font-semibold">Jalin koneksi dengan teman belajar bahasa di seluruh dunia</h2>
                 <p className="opacity-70">
-                Practice conversations, make friends, and improve your language skills together
+                Latihan percakapan, cari teman baru, dan tingkatkan kemampuan bahasa bersama!
                 </p>
             </div>
             </div>

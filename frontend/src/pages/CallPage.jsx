@@ -89,7 +89,7 @@ const CallPage = () => {
           </StreamVideo>
         ) : (
           <div className="flex items-center justify-center h-full">
-            <p>Could not initialize call. Please refresh or try again later.</p>
+            <p>Gagal memulai panggilan. Silakan muat ulang atau coba lagi nanti.</p>
           </div>
         )}
       </div>

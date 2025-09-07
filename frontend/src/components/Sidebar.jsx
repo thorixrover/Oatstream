@@ -1,11 +1,20 @@
 import { Link, useLocation } from "react-router";
 import useAuthUser from "../hooks/useAuthUser";
 import { BellIcon, HomeIcon, UsersIcon, Wheat } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { getFriendRequests } from "../lib/api";
 
 const Sidebar = () => {
   const { authUser } = useAuthUser();
   const location = useLocation();
   const currentPath = location.pathname;
+
+  // Ambil jumlah permintaan pertemanan masuk
+  const { data: friendRequests } = useQuery({
+    queryKey: ["friendRequests"],
+    queryFn: getFriendRequests,
+  });
+  const incomingRequests = friendRequests?.incomingReqs || [];
 
   return (
     <aside className="w-64 bg-base-200 border-r border-base-300 hidden lg:flex flex-col h-screen sticky top-0">
@@ -45,7 +54,14 @@ const Sidebar = () => {
             currentPath === "/notifications" ? "btn-active" : ""
           }`}
         >
-          <BellIcon className="size-5 text-base-content opacity-70" />
+          <div className="relative">
+            <BellIcon className="size-5 text-base-content opacity-70" />
+            {incomingRequests.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5">
+                {incomingRequests.length}
+              </span>
+            )}
+          </div>
           <span>Notifications</span>
         </Link>
       </nav>

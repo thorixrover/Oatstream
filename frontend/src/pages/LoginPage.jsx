@@ -58,7 +58,7 @@ const LoginPage = () => {
                 <div>
                   <h2 className="text-xl font-semibold">Selamat Datang</h2>
                   <p className="text-sm opacity-70">
-                    Masukklah dengan akunmu dan jelejahi dunia kami!
+                    Masukklah dengan akunmu dan jelajahi dunia kami!
                   </p>
                 </div>
 
@@ -104,7 +104,7 @@ const LoginPage = () => {
 
                   <div className="text-center mt-4">
                     <p className="text-sm">
-                      Don't have an account?{" "}
+                      Belum terdaftar sebagai pengguna?{" "}
                       <Link to="/signup" className="text-primary hover:underline">
                         Create one
                       </Link>
